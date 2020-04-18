@@ -18,8 +18,10 @@ search_bar.set(search_what)
 browser.driver.manage.timeouts.implicit_wait = 3
 #!#browser.window(title: "Foo")wait_while(&:exists?)
 
-search_result_h3s = browser.h3s(class:"rc")
-search_result_h3s.each { |h3| puts h3.text }
+search_result_divs = browser.divs(class:"rc")
+search_result_divs.each { |div| puts div.h3.text }
+
+binding.pry
 
 p "Méfait accompli, fermeture du browser"
 
