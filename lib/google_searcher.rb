@@ -12,16 +12,26 @@ search_bar = browser.text_field(class: "gsfi")
 search_bar.set(search_what)
 
 #appuie sur entrer
-
 (search_bar.send_keys(:enter))
+
+#méthode du clic
+#!#submit_button = browser.button(type:"submit")
+#!#submit_button.click
+
 
 browser.driver.manage.timeouts.implicit_wait = 3
 #!#browser.window(title: "Foo")wait_while(&:exists?)
 
-search_result_divs = browser.divs(class:"rc")
-search_result_divs.each { |div| puts div.h3.text }
+#puts browser.url
+goto = []
+page_title = [] 
 
-binding.pry
+search_result_divs = browser.links(:xpath => '//div[@class="rc"]//a')
+search_result_divs.each do |a|
+	p a.text
+	goto << a.href
+end
+
 
 p "Méfait accompli, fermeture du browser"
 
@@ -31,8 +41,7 @@ browser.close
 #!#while true
 #!#end
 
-#méthode du clic
-#!#submit_button = browser.button(type:"submit")
-#!#submit_button.click
 
-Launchy.open("http://stackoverflow.com")
+Launchy.open(goto[0])
+
+
